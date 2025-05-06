@@ -1,8 +1,6 @@
 package Coding_Qus;
 
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
+import java.util.*;
 import java.util.Map.Entry;
 import java.util.stream.Collectors;
 //Print repeated characters count in a string
@@ -10,9 +8,11 @@ public class DuplicateCharsWithFrequency_HashMap {
 
 	public static void main(String[] args) {
 		String duplicateString= "HIIIIIII Eshaan";
-		char duplicatesArray[] = duplicateString.toCharArray();
+		String duplicatesArray[] = duplicateString.split("");//duplicateString.toCharArray();
 		
-		HashMap<Character,Integer> hashMap=new HashMap<Character,Integer>();
+		List<String> inputList = Arrays.asList(duplicatesArray);
+		
+		HashMap<String,Integer> hashMap=new HashMap<String,Integer>();
 		
 		System.out.println(" Original String "+duplicateString);
 		
@@ -26,10 +26,10 @@ public class DuplicateCharsWithFrequency_HashMap {
 			}
 			
 		}
-		Iterator<Entry<Character, Integer>> itr=hashMap.entrySet().iterator();
+		Iterator<Entry<String, Integer>> itr=hashMap.entrySet().iterator();
 		while(itr.hasNext())
 		{
-			Entry<Character, Integer> entry = itr.next();
+			Entry<String, Integer> entry = itr.next();
 			System.out.println(" ");
 			System.out.println(" Number = "+entry.getKey()+" -- "+entry.getValue());
 			
@@ -37,15 +37,20 @@ public class DuplicateCharsWithFrequency_HashMap {
 		
 		//using java8
 		System.out.println(" Using java8 ");
-		Map<Character, Long> countsMap = duplicateString.chars().mapToObj(c->(char)c).filter(Character::isLetter).collect(Collectors.groupingBy(c->c,Collectors.counting()));
-		Iterator<Entry<Character, Long>> itr1=countsMap.entrySet().iterator();
-		while(itr1.hasNext())
-		{
-			Entry<Character, Long> entry = itr1.next();
-			System.out.println(" ");
-			System.out.println(" Number = "+entry.getKey()+" -- "+entry.getValue());
-			
-		}
+		Map<Object, Long> countMap = duplicateString.chars().mapToObj(c -> (char)c).collect(Collectors.groupingBy(c->c,Collectors.counting()));
+		countMap.entrySet().stream().forEach( entry -> System.out.println("Character "+entry.getKey()+" value "+entry.getValue()));
+		System.out.println(" Using list of strings print only duplicate");
+		Map<String,Long> countsMap2 = inputList.stream().collect(Collectors.groupingBy(input -> input, Collectors.counting()));
+		  countsMap2.entrySet().stream().filter(number -> number.getValue() > 1).map(
+				  entry -> "Character "+entry.getKey()+" value "+entry.getValue()).forEach(System.out::println);
+
+		System.out.println("sentence");
+		String sentence = "I am learning Java. Java is a programming language. Java is used in web development.";
+		String[] strArray = sentence.split(" ");
+		List<String> strList = Arrays.asList(strArray);
+		Map<Object, Long> countmap1 = strList.stream().collect(Collectors.groupingBy(s->s,Collectors.counting()));
+		countmap1.entrySet().forEach(entry -> System.out.println(entry.getKey()+":"+entry.getValue()));
+		
 	}
 
 }

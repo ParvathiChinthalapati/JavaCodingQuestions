@@ -35,8 +35,18 @@ public class getCountOfEmployee_GroupByDept {
 			System.out.println(" "+entry.getKey()+"  "+entry.getValue());
 		}
 		
-	
-		
+	//printing empnames working in each dept
+
+		empList.stream().collect(Collectors.groupingBy(Employee::getDept)).entrySet().stream().map(
+				entry -> "Department "+entry.getKey()+" Employees "+entry.getValue().stream().map(Employee::getName).collect(Collectors.toList()))
+				.forEach(System.out::println);
+
+		//improvising code
+		empList.stream()
+				.collect(Collectors.groupingBy(Employee::getDept,
+						Collectors.mapping(Employee::getName, Collectors.toList())))
+				.forEach((dept, employees) ->
+						System.out.println("Department " + dept + " Employees " + employees));
 	}
 
 }

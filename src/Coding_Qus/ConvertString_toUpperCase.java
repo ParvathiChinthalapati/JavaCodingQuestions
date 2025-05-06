@@ -14,7 +14,7 @@ public class ConvertString_toUpperCase {
 		strList.add("surya");
 		strList.add("eshaan");
 
-		List<String> uppercaseList = strList.stream().map(String::toUpperCase).toList();
+		List<String> uppercaseList = strList.stream().map(name -> name.toUpperCase()).toList();
 		System.out.println("uppercaseList " + uppercaseList);
 		
 		List<String> lowercaseList = uppercaseList.stream().map(String::toLowerCase).toList();

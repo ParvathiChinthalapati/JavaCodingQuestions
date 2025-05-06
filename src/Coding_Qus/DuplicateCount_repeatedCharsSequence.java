@@ -6,22 +6,21 @@ public class DuplicateCount_repeatedCharsSequence {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		int count = 1;
-		String duplicate = "AAAAAABBCCAAB";
-		char currentChar = duplicate.charAt(0);
+		String input = "AAAAAABBCCAAB";
+		char currentChar = input.charAt(0);
 		StringBuilder sb = new StringBuilder();
-		for (int i = 1; i < duplicate.length(); i++) {
-			if (duplicate.charAt(i) == currentChar) {
+		for(int i=1;i<input.length();i++) {
+			if(currentChar == input.charAt(i)) {
 				count++;
-
-			} else {
+			}else {
 				sb.append(count).append(currentChar);
-				currentChar = duplicate.charAt(i);
-				count = 1;
+				count=1;
+				currentChar = input.charAt(i);
 			}
-
 		}
 		sb.append(count).append(currentChar);
-		System.out.println("" + sb);
+		System.out.println("result: "+sb);
+
 	}
 
 }

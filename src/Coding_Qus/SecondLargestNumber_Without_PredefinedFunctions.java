@@ -1,6 +1,7 @@
 package Coding_Qus;
 
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 
 /* find second largest number without any predefined functions */
@@ -31,6 +32,9 @@ public class SecondLargestNumber_Without_PredefinedFunctions {
 
 	System.out.println(sortedList);
 	System.out.println("Second largest number "+sortedList.get(sortedList.size() - 2));
+	//using java8
+		System.out.println("Using java8");
+		arrayList.stream().sorted(Comparator.reverseOrder()).limit(2).skip(1).forEach(System.out::println);
 }
 }
 

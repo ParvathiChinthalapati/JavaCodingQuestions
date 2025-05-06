@@ -42,12 +42,7 @@ public class DuplicatesNumbersWithFrequency_HashMap {
 		System.out.println(" Using java8");
 		List<Integer> list = Arrays.asList(8, 1, 6, 1, 10, 7, 8, 1, 7, 7, 7);
 		Map<Integer, Long> hashMap1 = list.stream().collect(Collectors.groupingBy(c -> c, Collectors.counting()));
-		Iterator<Entry<Integer, Long>> itr1 = hashMap1.entrySet().iterator();
-		while (itr1.hasNext()) {
-			Entry<Integer, Long> entry = itr1.next();
-			System.out.println(" ");
-			System.out.println(" Number = " + entry.getKey() + " -- " + entry.getValue());
-
-		}
+		hashMap1.entrySet().stream().filter(entry -> entry.getValue()>1).map(entry -> " Number " + entry.getKey() + " -- " + entry.getValue())
+				.forEach(System.out::println);
 	}
 }
